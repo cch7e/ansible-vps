@@ -27,20 +27,20 @@
     mode: "660"
 
 - name: Start v2ray container
-  become: yes
   ansible.builtin.shell:
     chdir: "/services/v2ray"
     cmd: docker-compose up -d
 
 - name: Install tls-shunt-proxy
-  become: yes
   ansible.builtin.shell:
-    cmd: bash <(curl -L -s https://raw.githubusercontent.com/liberal-boy/tls-shunt-proxy/master/dist/install.sh)
+    chdir: "~"
+    cmd: |
+      curl -L -s https://raw.githubusercontent.com/liberal-boy/tls-shunt-proxy/master/dist/install.sh -o install_tls_shunt-proxy.sh
+      bash install_tls_shunt-proxy.sh
 
 - name: Modify tls-shunt-proxy config
-  become: yes
   ansible.builtin.shell: |
-    sed -i 's/vmess.example.com/{{ domain_name }}/' /etc/tls-shunt-proxy/config.yaml
+    sed -i 's/name: vmess.example.com/name: {{ domain_name }}/' /etc/tls-shunt-proxy/config.yaml
     sed -i 's/managedcert: false/managedcert: true/' /etc/tls-shunt-proxy/config.yaml
 
 - name: Restart tls-shunt-proxy

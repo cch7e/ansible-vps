@@ -3,5 +3,17 @@
 
   roles:
     - role: docker
+      tags:
+        - docker
+
+    - role: autoheal
+      tags:
+        - autoheal
+
     - role: ddns
+      tags:
+        - ddns
+
     - role: v2ray
+      tags:
+        - v2ray

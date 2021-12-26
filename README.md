@@ -20,5 +20,5 @@
 
 5. Change settings in `group_vars/all.yml`.
 
-6. Run the playbook - something like `ansible-playbook -i inventory vps.yml -b -K` should do you nicely.
+6. Run the playbook - something like `ansible-playbook -i inventory vps.yml -u root -k --ask-vault-pass` should do you nicely.
 

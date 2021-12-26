@@ -29,7 +29,6 @@
     mode: "660"
 
 - name: Start container
-  become: yes
   ansible.builtin.shell:
     chdir: "/services/ddns"
     cmd: docker-compose up -d
