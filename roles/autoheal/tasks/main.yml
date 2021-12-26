@@ -1,0 +1,23 @@
+---
+- name: Create Directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "root"
+    group: "root"
+    mode: '770'
+  with_items:
+    - "/services/autoheal"
+
+- name: Template docker-compose.yml
+  template:
+    src: "docker-compose.yml"
+    dest: "/services/autoheal/docker-compose.yml"
+    owner: "root"
+    group: "root"
+    mode: "660"
+
+- name: Start container
+  ansible.builtin.shell:
+    chdir: "/services/autoheal"
+    cmd: docker-compose up -d 

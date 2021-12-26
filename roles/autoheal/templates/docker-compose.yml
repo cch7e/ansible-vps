@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  autoheal:
+    container_name: autoheal
+    image: willfarrell/autoheal
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    environment:
+      - AUTOHEAL_CONTAINER_LABEL=all
