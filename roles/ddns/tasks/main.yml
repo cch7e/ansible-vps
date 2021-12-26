@@ -1,0 +1,35 @@
+---
+- name: Create Directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "root"
+    group: "root"
+    mode: '770'
+  with_items:
+    - "/services/ddns"
+    - "/services/ddns/data"
+
+- name: Template files
+  template:
+    src: "{{ item }}"
+    dest: "/services/ddns/data/{{ item }}"
+    owner: "root"
+    group: "root"
+    mode: "400"
+  with_items:
+    - "config.json"
+
+- name: Template docker-compose.yml
+  template:
+    src: "docker-compose.yml"
+    dest: "/services/ddns/docker-compose.yml"
+    owner: "root"
+    group: "root"
+    mode: "660"
+
+- name: Start container
+  become: yes
+  ansible.builtin.shell:
+    chdir: "/services/ddns"
+    cmd: docker-compose up -d

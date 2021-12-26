@@ -1,0 +1,7 @@
+---
+- hosts: all
+
+  roles:
+    - role: docker
+    - role: ddns
+    - role: v2ray

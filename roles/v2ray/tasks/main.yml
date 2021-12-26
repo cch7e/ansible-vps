@@ -1,0 +1,51 @@
+---
+- name: Create v2ray Directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "root"
+    group: "root"
+    mode: '770'
+  with_items:
+    - "/services/v2ray"
+    - "/services/v2ray/data"
+
+- name: Template v2ray config.json
+  template:
+    src: "config.json"
+    dest: "/services/v2ray/data/config.json"
+    owner: "root"
+    group: "root"
+    mode: "660"
+
+- name: Template v2ray docker-compose.yml
+  template:
+    src: "docker-compose.yml"
+    dest: "/services/v2ray/docker-compose.yml"
+    owner: "root"
+    group: "root"
+    mode: "660"
+
+- name: Start v2ray container
+  become: yes
+  ansible.builtin.shell:
+    chdir: "/services/v2ray"
+    cmd: docker-compose up -d
+
+- name: Install tls-shunt-proxy
+  become: yes
+  ansible.builtin.shell:
+    cmd: bash <(curl -L -s https://raw.githubusercontent.com/liberal-boy/tls-shunt-proxy/master/dist/install.sh)
+
+- name: Modify tls-shunt-proxy config
+  become: yes
+  ansible.builtin.shell: |
+    sed -i 's/vmess.example.com/{{ domain_name }}/' /etc/tls-shunt-proxy/config.yaml
+    sed -i 's/managedcert: false/managedcert: true/' /etc/tls-shunt-proxy/config.yaml
+
+- name: Restart tls-shunt-proxy
+  ansible.builtin.service:
+    name: tls-shunt-proxy
+    state: restarted
+  register: result
+  until: result is succeeded

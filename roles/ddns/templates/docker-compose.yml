@@ -1,0 +1,12 @@
+version: "3.8"
+
+services:
+  ddns:
+    container_name: ddns
+    image: qmcgaw/ddns-updater
+    restart: always
+    # ports:
+    #   - 8000:8000
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - ./data:/updater/data

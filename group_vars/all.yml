@@ -1,0 +1,11 @@
+---
+domain_name: 
+
+# v2ray
+v2ray_port: 40001
+# get random uuid from https://www.uuidgenerator.net/
+v2ray_client_id: 
+v2ray_alter_id: 
+
+# cloudflare
+cloudflare_token: 

@@ -1,0 +1,12 @@
+{
+  "settings": [
+      {
+          "provider": "cloudflare",
+          "domain": "{{ domain_name }}",
+          "host": "@",
+          "ttl": 600,
+          "token": "{{ cloudflare_token }}",
+          "ip_version": "ipv4"
+      }
+  ]
+}
