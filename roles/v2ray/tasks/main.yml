@@ -16,7 +16,7 @@
     dest: "/services/v2ray/data/config.json"
     owner: "root"
     group: "root"
-    mode: "660"
+    mode: "444"
 
 - name: Template v2ray docker-compose.yml
   template:

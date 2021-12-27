@@ -8,6 +8,15 @@
     mode: '770'
   with_items:
     - "/services/ddns"
+
+- name: Create Directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "root"
+    group: "root"
+    mode: '777'
+  with_items:
     - "/services/ddns/data"
 
 - name: Template files
@@ -16,7 +25,7 @@
     dest: "/services/ddns/data/{{ item }}"
     owner: "root"
     group: "root"
-    mode: "400"
+    mode: "444"
   with_items:
     - "config.json"
 

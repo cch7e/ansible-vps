@@ -2,7 +2,6 @@
   "inbounds": [
     {
       "protocol": "vmess",
-      "listen": "127.0.0.1",
       "port": {{ v2ray_port }},
       "settings": {
         "clients": [

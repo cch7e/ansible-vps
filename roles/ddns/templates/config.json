@@ -5,6 +5,7 @@
           "domain": "{{ domain_name }}",
           "host": "@",
           "ttl": 600,
+	  "zone_identifier": "{{ cloudflare_site_zone_id }}",
           "token": "{{ cloudflare_token }}",
           "ip_version": "ipv4"
       }
