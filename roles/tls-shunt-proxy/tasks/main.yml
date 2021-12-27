@@ -1,0 +1,19 @@
+---
+- name: Install tls-shunt-proxy
+  ansible.builtin.shell:
+    chdir: "~"
+    cmd: |
+      curl -L -s https://raw.githubusercontent.com/liberal-boy/tls-shunt-proxy/master/dist/install.sh -o install_tls_shunt-proxy.sh
+      bash install_tls_shunt-proxy.sh
+
+- name: Modify tls-shunt-proxy config
+  ansible.builtin.shell: |
+    sed -i 's/name: vmess.example.com/name: {{ domain_name }}/' /etc/tls-shunt-proxy/config.yaml
+    sed -i 's/managedcert: false/managedcert: true/' /etc/tls-shunt-proxy/config.yaml
+
+- name: Restart tls-shunt-proxy
+  ansible.builtin.service:
+    name: tls-shunt-proxy
+    state: restarted
+  register: result
+  until: result is succeeded

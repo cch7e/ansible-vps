@@ -10,10 +10,19 @@
       tags:
         - autoheal
 
-    - role: ddns
-      tags:
-        - ddns
-
     - role: v2ray
       tags:
         - v2ray
+
+    - role: tls-shunt-proxy
+      tags:
+        - tls-shunt-proxy
+        - tls
+      when: (tls_shunt_proxy_enabled | default(False))
+
+    - role: ddns
+      tags:
+        - ddns
+        - tls
+      when: (tls_shunt_proxy_enabled | default(False))
+
