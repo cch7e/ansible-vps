@@ -3,8 +3,8 @@
   ansible.builtin.shell:
     chdir: "~"
     cmd: |
-      curl -L -s https://raw.githubusercontent.com/liberal-boy/tls-shunt-proxy/master/dist/install.sh -o install_tls_shunt-proxy.sh
-      bash install_tls_shunt-proxy.sh
+      curl -L -s https://raw.githubusercontent.com/liberal-boy/tls-shunt-proxy/master/dist/install.sh -o install_tls-shunt-proxy.sh
+      bash install_tls-shunt-proxy.sh
 
 - name: Modify tls-shunt-proxy config
   ansible.builtin.shell: |

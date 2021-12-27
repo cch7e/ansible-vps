@@ -1,6 +1,6 @@
 [all]
 ## Example when running from a remote workstation
-vps ansible_host=
+# vps ansible_host=
 
-## Example when running directly on your homelab server
+## Example when running directly on your server
 # vps ansible_connection=local ansible_host=localhost
