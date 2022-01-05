@@ -7,4 +7,5 @@ services:
     restart: always
     network_mode: host
     volumes:
+      - /etc/localtime:/etc/localtime:ro
       - ./data:/etc/v2ray

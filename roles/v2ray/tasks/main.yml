@@ -1,4 +1,8 @@
 ---
+- name: "Set timezone to Asia/Shanghai"
+  timezone:
+    name: "Asia/Shanghai"
+
 - name: Create v2ray Directories
   file:
     path: "{{ item }}"
